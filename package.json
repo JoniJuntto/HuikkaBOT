@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Twitch chat botti",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +11,10 @@
   "author": "Huikka",
   "license": "ISC",
   "dependencies": {
+    "@duncte123/obs-websocket-js": "^4.9.3",
     "dotenv": "^16.0.1",
     "nodemon": "^2.0.18",
+    "obs-websocket-js": "^5.0.0-beta.1",
     "tmi.js": "^1.8.5"
   }
 }

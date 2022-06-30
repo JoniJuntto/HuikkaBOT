@@ -1,6 +1,7 @@
-const tmi = require("tmi.js");
-require("dotenv").config();
-authKey = process.env.authkey;
+import tmi from 'tmi.js';
+import AlertCorrectGuess from "./app.js";
+const authKey = process.env.authKey
+
 
 const reputation = {};
 const answer = {};
@@ -50,6 +51,7 @@ client.on("message", async (channel, tags, message, self) => {
     const user = tags.username;
     if (quess === answer[tags.username]) {
       client.say(channel, `@${tags.username} you guessed correctly!`);
+      AlertCorrectGuess();
       return;
     }
   }
@@ -107,7 +109,5 @@ client.on("message", async (channel, tags, message, self) => {
       client.say(channel, `@${tags.username}, You survived.`);
     }
   }
-  else if (command === 'bits'){
-    client.say(channel, `@${tags.username}, you have ${tags.bits} bits.`);
-  }
+
 });
