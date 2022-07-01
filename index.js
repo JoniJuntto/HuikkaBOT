@@ -3,6 +3,7 @@ import AlertCorrectGuess from "./AlertCorrect.js";
 import "dotenv/config";
 import authKey from "./constants.js";
 console.log(authKey);
+import DrinkinGame from "./DrinkingGame.js";
 
 const reputation = {};
 const answer = {};
@@ -93,7 +94,20 @@ client.on("message", async (channel, tags, message, self) => {
       }
       break;
     case "wadap":
-      client.say(channel, `@${tags.username}, Koodataan chattibottia Nodella. huikka1HI`);
+      client.say(
+        channel,
+        `@${tags.username}, Koodataan chattibottia Nodella, tehdään Twitch chattiin juomapeli. huikka1HI`
+      );
+      break;
+    case "ikea":
+      client.say(
+        channel,
+        `@${tags.username},Tänään meillä onkin erittäin mielenkiintoinen peli testissä 🤩, sain nimittäin ennakkoon tämmöisen Ikea simulaattorin kokeiluun 🤯. Täältähän löyty Ikea Family Keycard😱. Kokeilaas tätä toista ovee😰. Hui vitsi mä pelästyin😳 Äkkii pois täältä pandat hyökkää🫣! Yks tehtävä cräftää tää tästä. Vaaaaaaaaau🥳! Oohohoho nyt on hiiri käsi upgradettu😎. Pikku aimbotti tohon noin😤. Nyt on eka leveli päästy läpi🤭.`
+      );
+      break;
+    case "ilmoittaudu":
+      client.say(channel, `@${tags.username}, Olet ilmoittautunut juomapeliin.`);
+      DrinkinGame(tags.username);
       break;
     default:
       console.log("Unknown command");
