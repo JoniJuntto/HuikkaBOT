@@ -4,9 +4,8 @@ import "dotenv/config";
 import authKey from "./constants.js";
 console.log(authKey);
 import DrinkinGame from "./DrinkingGame.js";
+import localStorage from "local-storage";
 
-const reputation = {};
-const answer = {};
 const client = new tmi.Client({
   options: { debug: true },
   connection: {
@@ -42,6 +41,7 @@ client.on("message", async (channel, tags, message, self) => {
     const data = await response.json();
     return data.message;
   };
+  const pollResult = []; //array for poll results
 
   switch (command) {
     case "kanyeortrump":
@@ -96,7 +96,7 @@ client.on("message", async (channel, tags, message, self) => {
     case "wadap":
       client.say(
         channel,
-        `@${tags.username}, Koodataan chattibottia Nodella, tehdään Twitch chattiin juomapeli. huikka1HI`
+        `@${tags.username}, Koodataan yhteiskäyttökahvipaketti-sivusto ja sille bäkkäri. huikka1Moi`
       );
       break;
     case "ikea":
@@ -105,9 +105,75 @@ client.on("message", async (channel, tags, message, self) => {
         `@${tags.username},Tänään meillä onkin erittäin mielenkiintoinen peli testissä 🤩, sain nimittäin ennakkoon tämmöisen Ikea simulaattorin kokeiluun 🤯. Täältähän löyty Ikea Family Keycard😱. Kokeilaas tätä toista ovee😰. Hui vitsi mä pelästyin😳 Äkkii pois täältä pandat hyökkää🫣! Yks tehtävä cräftää tää tästä. Vaaaaaaaaau🥳! Oohohoho nyt on hiiri käsi upgradettu😎. Pikku aimbotti tohon noin😤. Nyt on eka leveli päästy läpi🤭.`
       );
       break;
-    case "ilmoittaudu":
-      client.say(channel, `@${tags.username}, Olet ilmoittautunut juomapeliin.`);
+    case "osallistu":
+      client.say(channel, `@${tags.username}, Olet osallistunut arvontaan!`);
       DrinkinGame(tags.username);
+      break;
+    case "discord":
+      client.say(
+        channel,
+        `@${tags.username}, Discord: https://discord.gg/TBEwYKK82b .`
+      );
+      break;
+    case "tilaapenispilleri":
+      client.say(
+        channel,
+        `Moro! 😎 Se ois Ville tästä penispitkäksi Oy:stä.🤭 Meillä ois tarjota sulle tällänen penispidentäjä 😎. Vaan kuukauden käytön jälkeen saat 3x pidemmän peniksen jos käytät sitä 2 viikkoa ja käytät kanssa viikon ja se kerrottuna 3x1x0 ja siihen plussataan sun peniksen pituus 🥳 Miltä kuulostaa? Joo eiköhän laiteta pakettiin! 🤪`
+      );
+      break;
+    case "koulutus":
+      client.say(
+        channel,
+        `@${tags.username}, Informaatioteknologian tradenomi Haaga-Helia .`
+      );
+      break;
+    case "opettele":
+      client.say(channel, `@${tags.username}, https://www.codecademy.com/.`);
+      break;
+    case "komennot":
+      client.say(
+        channel,
+        `@${tags.username}, !github !koulutus !opettele !tilaapenispilleri !discord !komennot !guess !roullette !howold !liima !kanyeortrump !wadap !ikea !osallistu !koodannut`
+      );
+      break;
+    case "github":
+      client.say(
+        channel,
+        `@${tags.username}, Github:
+        https://github.com/jonijuntto
+        `
+      );
+      break;
+    case "koodannut":
+      client.say(
+        channel,
+        `@${tags.username}, ite oon koodannu yhteensä varmaan kymmeniä tunteja ja oon 100% ammattilainen vaikka oon koodannu varmaan 100 tuntiakin koodannu.`
+      );
+      case "poll":
+        const answer = message.split(" ")[1].toLowerCase();
+        if (answer === "1"){
+          client.say(channel, `@${tags.username}, voted for 1`);
+          localStorage.setItem("pollResult", JSON.stringify(pollResult));
+        }else if (answer === "2"){
+          client.say(channel, `@${tags.username}, voted for 2`);
+          localStorage.setItem("pollResult", JSON.stringify(pollResult));
+        } else{
+          client.say(channel, `@${tags.username}, You can only vote for 1 or 2`);
+        }
+        break;
+      case "results":
+        console.log("in poll result");
+        const result1 = [];
+        const result2 = [];
+        const pollResult = JSON.parse(localStorage.getItem("pollResult"));
+        pollResult.forEach((answer) => {
+          if (answer === "1"){
+            result1.push(answer);
+          }else if (answer === "2"){
+            result2.push(answer);
+          }
+        });
+        client.say(channel, `@${tags.username}, 1: ${result1.length} 2: ${result2.length}`);
       break;
     default:
       console.log("Unknown command");

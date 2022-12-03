@@ -16,9 +16,17 @@ export default async function DrinkingGame(username) {
     const doc = await docRef.get();
     console.log("Document data:", doc.data().usernames);
 
-    await docRef.set({
-      usernames: [...doc.data().usernames, username],
-    });
+    if (doc.data().usernames === undefined) {
+      await docRef.set({
+        usernames: [username],
+      });
+    } else {
+      let usernames = Array.from(new Set([...doc.data().usernames, username]));
+      console.log(usernames);
+      await docRef.set({
+        usernames: usernames,
+      });
+    }
   } catch (error) {
     console.log(error);
   }

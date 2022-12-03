@@ -14,6 +14,7 @@
     "@duncte123/obs-websocket-js": "^4.9.3",
     "dotenv": "^16.0.1",
     "firebase-admin": "^11.0.0",
+    "local-storage": "^2.0.0",
     "nodemon": "^2.0.18",
     "obs-websocket-js": "^5.0.0-beta.1",
     "tmi.js": "^1.8.5"
