@@ -5,18 +5,27 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Huikka",
   "license": "ISC",
   "dependencies": {
     "@duncte123/obs-websocket-js": "^4.9.3",
+    "@twurple/api": "^7.0.0",
+    "@twurple/auth": "^7.0.0",
+    "@twurple/chat": "^7.0.0",
+    "@twurple/easy-bot": "^7.0.0",
+    "@twurple/eventsub-ws": "^7.0.0",
+    "audic": "^3.0.2",
     "dotenv": "^16.0.1",
     "firebase-admin": "^11.0.0",
+    "fs": "^0.0.1-security",
     "local-storage": "^2.0.0",
     "nodemon": "^2.0.18",
-    "obs-websocket-js": "^5.0.0-beta.1",
-    "tmi.js": "^1.8.5"
+    "obs-websocket-js": "^5.0.3",
+    "sqlite3": "^5.1.6",
+    "tmi.js": "^1.8.5",
+    "typescript": "^5.1.6"
   }
 }
