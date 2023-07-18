@@ -7,16 +7,10 @@ import { EventSubWsListener } from "@twurple/eventsub-ws";
 import { playAudioFile } from "audic";
 
 dotenv.config();
+const clientId = process.env.clientId;
+const clientSecret = process.env.clientSecret;
+const userId = process.env.userId;
 
-const clientId = "f1pd172fxeiww25pk2yfays7ahpaaa";
-const clientSecret = "cdfqumw191wqstvc85l0hwxxnwac4a";
-const accessToken = "vc6boctnkd9qavixo58k9ec62bbjii";
-const refreshToken = "nartlgrydzm8vsxtzios6flc59h8xayh1la3kf9hduzrpkqgys";
-const userId = "750358595";
-
-const tokenData = JSON.parse(
-  await fs.readFile("./tokens/tokens.750358595.json", "UTF-8")
-);
 const authProvider = new RefreshingAuthProvider({
   clientId,
   clientSecret,
@@ -28,6 +22,10 @@ authProvider.onRefresh(
       JSON.stringify(newTokenData, null, 4),
       "UTF-8"
     )
+);
+
+const tokenData = JSON.parse(
+  await fs.readFile(`./tokens/tokens.${userId}.json`, "UTF-8")
 );
 
 await authProvider.addUserForToken(tokenData, ["chat"]);
